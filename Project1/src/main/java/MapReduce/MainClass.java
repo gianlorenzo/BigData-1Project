@@ -14,6 +14,7 @@ public class MainClass {
 		Job job = new Job(new Configuration(), "MainClass");
 		
 		job.setJarByClass(MainClass.class);
+		
 
 	}
 
