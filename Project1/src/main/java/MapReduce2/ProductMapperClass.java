@@ -1,4 +1,4 @@
-package MapReduce;
+package MapReduce2;
 
 import java.io.IOException;
 

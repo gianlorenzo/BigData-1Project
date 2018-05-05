@@ -1,4 +1,4 @@
-package MapReduce;
+package MapReduce2;
 
 import org.apache.hadoop.mapreduce.Job;
 
