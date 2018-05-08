@@ -3,13 +3,14 @@ package MapReduce2;
 
 import java.io.IOException;
 
+import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapred.MapReduceBase;
 import org.apache.hadoop.mapreduce.Reducer;
 
 
-public class ProductReducerClass extends Reducer<Text, IntWritable, Text, IntWritable> {
-	
+public class ProductReducerClass extends Reducer<Text, Text, Text, IntWritable> {
 	public void reduce(Text key, Iterable<IntWritable> values,
 			Context context) throws IOException, InterruptedException {
 
@@ -23,5 +24,10 @@ public class ProductReducerClass extends Reducer<Text, IntWritable, Text, IntWri
 	}
 
 
-
+	/*String translations = "";
+	for (Text val : values) {
+	translations += "," + val.toString();
+	}
+	result.set(translations);
+	context.write(key, result);*/
 }

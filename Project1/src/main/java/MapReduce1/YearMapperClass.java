@@ -8,7 +8,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapreduce.Mapper;
-
+import java.util.Date;
 
 public class YearMapperClass extends Mapper<LongWritable, Text, Text, IntWritable> {
 
@@ -16,22 +16,19 @@ public class YearMapperClass extends Mapper<LongWritable, Text, Text, IntWritabl
 	private Text word = new Text();
 */	
 	
-	String year="";
-	String word="";
+	private String year;
+	private String word;
 
 	public void map(LongWritable key, Text value, OutputCollector<Text,Text> output, Context context)	throws IOException, InterruptedException {
- 
+		
 		String line = value.toString();
-		String[] results=line.split(",");
+		String[] results = line.split(",");
 		word=results[7];
 		year=results[8]; // è dato come timestamp, va convertito in data e estratto l'anno
 		output.collect(new Text(year), new Text(word));
-		/*
-			StringTokenizer tokenizer = new StringTokenizer(line);
-			while (tokenizer.hasMoreTokens()) {
-				word.set(tokenizer.nextToken());
-				context.write(word, one);
-		*/
+		
+			
+		
 		}
 		 
 	}

@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 
 
@@ -28,7 +29,7 @@ public class MainClass {
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
 		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);
+		job.setOutputValueClass(Text.class);
 
 		job.waitForCompletion(true);
 		
