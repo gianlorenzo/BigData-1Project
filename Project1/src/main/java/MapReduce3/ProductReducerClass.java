@@ -20,7 +20,7 @@ public class ProductReducerClass extends Reducer<Text, IntWritable, Text, IntWri
 		int i = 0;
 		
 		while(values.hasNext()) {
-			i++;
+			i += values.next().get(); 
 		}
 		
 		output.collect(key, new IntWritable(i));

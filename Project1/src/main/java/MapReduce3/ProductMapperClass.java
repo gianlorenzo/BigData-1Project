@@ -17,7 +17,7 @@ public class ProductMapperClass extends Mapper<LongWritable, Text, Text, IntWrit
 		
 		String[] results = value.toString().split(",");
 		
-		output.collect(new Text(results[1]), new IntWritable(Integer.parseInt(results[6])));
+		output.collect(new Text(results[1]), new IntWritable(Integer.parseInt(results[0])));
 		
 		
 	}

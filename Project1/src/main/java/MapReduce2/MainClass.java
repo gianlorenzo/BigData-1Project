@@ -16,23 +16,24 @@ import org.apache.hadoop.io.Text;
 public class MainClass {
 
 	public static void main (String args[]) throws Exception {
-		
+
 		Job job = new Job(new Configuration(), "MainClass");
-		
+
 		job.setJarByClass(MainClass.class);
 		job.setMapperClass(ProductMapperClass.class);
-		
+
 		job.setReducerClass(ProductReducerClass.class);
-		
+
 
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
+	
 		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(Text.class);
+		job.setOutputValueClass(IntWritable.class);
 
 		job.waitForCompletion(true);
-		
+
 
 	}
 

@@ -10,7 +10,7 @@ import org.apache.hadoop.mapred.MapReduceBase;
 import org.apache.hadoop.mapreduce.Reducer;
 
 
-public class ProductReducerClass extends Reducer<Text, Text, Text, IntWritable> {
+public class ProductReducerClass extends Reducer<Text, IntWritable, Text, IntWritable> {
 	public void reduce(Text key, Iterable<IntWritable> values,
 			Context context) throws IOException, InterruptedException {
 
