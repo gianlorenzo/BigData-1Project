@@ -19,7 +19,7 @@ public class YearMapperClass extends Mapper<LongWritable, Text, IntWritable, Int
 */	
 
 	
-	public void map(LongWritable key, Text value, OutputCollector<Text,Text> output, Context context)	throws IOException, InterruptedException {
+	public void map(LongWritable key, Text value,Context context)	throws IOException, InterruptedException {
 		
 		String line = value.toString();
 		String[] fields = line.split(",");
