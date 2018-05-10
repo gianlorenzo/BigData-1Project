@@ -32,12 +32,12 @@ public class ProductMapperClass extends Mapper<LongWritable, Text, Text, IntWrit
 
 		String line = value.toString();
 		String[] fields = line.split(",");
-		
 		try {
 			Calendar date=Calendar.getInstance();
 			date.setTimeInMillis(Long.parseLong((fields[7]))*1000);	
 			long anno=date.get(Calendar.YEAR);
-			context.write(new Text(fields[1]), new IntWritable(Integer.parseInt(fields[6])));
+			if(anno>=2003 && anno<=2012)
+				context.write(new Text(fields[1]+"-"+Long.toString(anno)), new IntWritable(Integer.parseInt(fields[6])));
 		}
 		catch (NumberFormatException e) {
 			context.write(new Text("perso"),one);
