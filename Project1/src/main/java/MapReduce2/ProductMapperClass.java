@@ -46,7 +46,7 @@ public class ProductMapperClass extends Mapper<LongWritable, Text, Text, IntWrit
 
 			word.set(fields[1]);
 
-			context.write(word, new IntWritable(Integer.parseInt(score)));
+			context.write(word, new IntWritable(1));
 
 
 		}
