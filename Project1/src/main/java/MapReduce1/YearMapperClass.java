@@ -12,10 +12,10 @@ import org.apache.hadoop.mapreduce.Mapper;
 import java.util.Calendar;
 import java.util.Date;
 
-public class YearMapperClass extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
+public class YearMapperClass extends Mapper<LongWritable, Text, LongWritable, IntWritable> {
 
 	private static final IntWritable one = new IntWritable(1);
-	private static final IntWritable MISSING = new IntWritable(0);
+	private static final LongWritable MISSING = new LongWritable(0);
 /*	private Text word = new Text();
 */	
 
@@ -28,8 +28,8 @@ public class YearMapperClass extends Mapper<LongWritable, Text, IntWritable, Int
 		try {
 				Calendar date=Calendar.getInstance();
 				date.setTimeInMillis(Integer.parseInt(fields[7])*1000);	
-				int anno=date.get(Calendar.YEAR);
-				context.write(new IntWritable(anno),one);
+				long anno=date.get(Calendar.YEAR);
+				context.write(new LongWritable(anno),one);
 		}
 		catch(NumberFormatException ex)
 		{

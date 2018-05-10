@@ -27,7 +27,7 @@ public static void main (String args[]) throws Exception {
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
-		job.setOutputKeyClass(IntWritable.class);
+		job.setOutputKeyClass(LongWritable.class);
 		job.setOutputValueClass(IntWritable.class);
 
 		job.waitForCompletion(true);
