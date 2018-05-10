@@ -15,6 +15,7 @@ import java.util.Date;
 public class YearMapperClass extends Mapper<LongWritable, Text, IntWritable, IntWritable> {
 
 	private static final IntWritable one = new IntWritable(1);
+	private static final IntWritable MISSING = new IntWritable(0);
 /*	private Text word = new Text();
 */	
 
@@ -23,14 +24,17 @@ public class YearMapperClass extends Mapper<LongWritable, Text, IntWritable, Int
 		
 		String line = value.toString();
 		String[] fields = line.split(",");
-		
-		Calendar date=Calendar.getInstance();
-		date.setTimeInMillis(Integer.parseInt(fields[7])*1000);
-		
-		int anno=date.get(Calendar.YEAR);
-		
-		
-		context.write(new IntWritable(anno),one);
+	
+		try {
+				Calendar date=Calendar.getInstance();
+				date.setTimeInMillis(Integer.parseInt(fields[7])*1000);	
+				int anno=date.get(Calendar.YEAR);
+				context.write(new IntWritable(anno),one);
+		}
+		catch(NumberFormatException ex)
+		{
+			context.write(MISSING,one);
+		}
 		
 		/*
 		word=results[7];
