@@ -27,7 +27,7 @@ public class YearMapperClass extends Mapper<LongWritable, Text, LongWritable, In
 	
 		try {
 				Calendar date=Calendar.getInstance();
-				date.setTimeInMillis(Integer.parseInt(fields[7])*1000);	
+				date.setTimeInMillis(Long.parseLong((fields[7]))*1000);	
 				long anno=date.get(Calendar.YEAR);
 				context.write(new LongWritable(anno),one);
 		}
