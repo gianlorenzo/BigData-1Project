@@ -22,7 +22,6 @@ public class MainClass {
 
 		job.setJarByClass(MainClass.class);
 		job.setMapperClass(ProductMapperClass.class);
-
 		job.setReducerClass(ProductReducerClass.class);
 
 
