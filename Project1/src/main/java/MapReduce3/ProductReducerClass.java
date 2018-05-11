@@ -1,31 +1,41 @@
 package MapReduce3;
 
-import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.MapWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.OutputCollector;
-import org.apache.hadoop.mapred.Reporter;
+import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.mapreduce.Reducer;
 
-public class ProductReducerClass extends Reducer<Text, IntWritable, Text, IntWritable> {
+
+public class ProductReducerClass extends Reducer<Text, MapWritable, Text, MapWritable> {
 	
-	public void reduce(Text key, Iterator<IntWritable> values,
-			 OutputCollector<Text, IntWritable> output,
-			 Reporter reporter)
-			throws IOException {
-		
-		int i = 0;
-		
-		while(values.hasNext()) {
-			i += values.next().get(); 
+	MapWritable mw = new MapWritable();
+	
+	public void reduce(Text key, MapWritable values,
+			Context context) throws IOException, InterruptedException {
+		int i =0; //score medio
+		for(Writable m : values.values()) {
+			i = (i+Integer.parseInt(m.toString()))/values.values().size();
+			mw.put(m, new LongWritable(i));
+			context.write(key, mw);
 		}
 		
-		output.collect(key, new IntWritable(i));
+
 		
+		
+
 		
 	}
 
+
+	/*String translations = "";
+	for (Text val : values) {
+	translations += "," + val.toString();
+	}
+	result.set(translations);
+	context.write(key, result);*/
 }
