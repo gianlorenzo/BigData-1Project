@@ -22,12 +22,16 @@ public static void main (String args[]) throws Exception {
 		job.setJarByClass(MainClass.class);
 		job.setMapperClass(YearMapperClass.class);
 		
+	//	job.setCombinerClass(YearCombinerClass.class);
+		
 		job.setReducerClass(YearReducerClass.class);
+		
 
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
 		job.setOutputKeyClass(Text.class);
+		
 		job.setOutputValueClass(IntWritable.class);
 
 		job.waitForCompletion(true);

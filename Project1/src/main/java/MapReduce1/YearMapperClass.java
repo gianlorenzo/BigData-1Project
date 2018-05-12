@@ -10,6 +10,7 @@ import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.util.Calendar;
+import java.util.StringTokenizer;
 
 public class YearMapperClass extends Mapper<LongWritable, Text, Text, IntWritable> {
 
@@ -24,13 +25,18 @@ public class YearMapperClass extends Mapper<LongWritable, Text, Text, IntWritabl
 		
 		String line = value.toString();
 		String[] fields = line.split(",");
-		word.set(fields[8]);
 		try {
 				Calendar date=Calendar.getInstance();
 				date.setTimeInMillis(Long.parseLong((fields[7]))*1000);	
 				long anno=date.get(Calendar.YEAR);
-				chiave.set(Long.toString(anno)+"-"+word);
-				context.write(chiave,one);
+				
+				StringTokenizer tokenizer = new StringTokenizer(fields[8]);
+				
+				while (tokenizer.hasMoreTokens()) {
+					word.set(tokenizer.nextToken());
+					chiave.set(Long.toString(anno)+"\t"+word);
+					context.write(chiave,one);
+				}		
 		}
 		catch(NumberFormatException ex)
 		{
