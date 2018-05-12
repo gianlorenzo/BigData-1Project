@@ -5,26 +5,31 @@ import java.io.IOException;
 
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.MapWritable;
 import org.apache.hadoop.io.Text;
 //import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.util.Calendar;
+//import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
-public class YearMapperClass extends Mapper<LongWritable, Text, Text, IntWritable> {
+public class YearMapperClass extends Mapper<LongWritable, Text, LongWritable, MapWritable> {
 
 	private static final IntWritable one = new IntWritable(1);
 	//private static final Text MISSING = new Text("0");
 	private Text word = new Text();
-	private Text chiave = new Text();
-	
+//	private Text chiave = new Text();
+	MapWritable map=new MapWritable();
 
 	
 	public void map(LongWritable key, Text value,Context context)	throws IOException, InterruptedException {
 		
 		String line = value.toString();
 		String[] fields = line.split(",");
+		
+		
 		try {
 				Calendar date=Calendar.getInstance();
 				date.setTimeInMillis(Long.parseLong((fields[7]))*1000);	
@@ -35,10 +40,11 @@ public class YearMapperClass extends Mapper<LongWritable, Text, Text, IntWritabl
 					while (tokenizer.hasMoreTokens()) 
 					{
 							word.set(tokenizer.nextToken());
-							chiave.set(Long.toString(anno)+"\t"+word);
-							context.write(chiave,one);
+							//chiave.set(Long.toString(anno)+"\t"+word);
+							map.put(word, one);
 					}
 				}
+				context.write(new LongWritable(anno),map);
 		}
 		catch(NumberFormatException ex)
 		{
