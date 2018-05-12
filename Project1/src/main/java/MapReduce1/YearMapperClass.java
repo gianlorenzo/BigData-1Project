@@ -15,13 +15,12 @@ import java.util.Calendar;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-public class YearMapperClass extends Mapper<LongWritable, Text, LongWritable, MapWritable> {
+public class YearMapperClass extends Mapper<LongWritable, Text, Text, IntWritable> {
 
 	private static final IntWritable one = new IntWritable(1);
 	//private static final Text MISSING = new Text("0");
 	private Text word = new Text();
-//	private Text chiave = new Text();
-	MapWritable map=new MapWritable();
+	private Text chiave = new Text();
 
 	
 	public void map(LongWritable key, Text value,Context context)	throws IOException, InterruptedException {
@@ -40,24 +39,17 @@ public class YearMapperClass extends Mapper<LongWritable, Text, LongWritable, Ma
 					while (tokenizer.hasMoreTokens()) 
 					{
 							word.set(tokenizer.nextToken());
-							//chiave.set(Long.toString(anno)+"\t"+word);
-							map.put(word, one);
+							chiave.set(Long.toString(anno)+"--"+word);
+							context.write(chiave,one);
 					}
 				}
-				context.write(new LongWritable(anno),map);
+				
 		}
 		catch(NumberFormatException ex)
 		{
-			//context.write(MISSING,one);
+			context.write(new Text("0000--"),one);
 		}
-		
-		/*
-		word=results[7];
-		year=results[8]; // è dato come timestamp, va convertito in data e estratto l'anno
-		output.collect(new Text(year), new Text(word));
-		*/
 			
-		
 		}
 		 
 	}
