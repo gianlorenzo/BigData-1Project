@@ -5,13 +5,13 @@ CREATE TABLE AMAZONPRODUCT (
 	ProfileName STRING, 
 	HelpfulnessNumerator INT, 
 	HelpfulnessDenominator INT, 
-	Score INT, 
+	Score FLOAT, 
 	TIME INT, 
 	Summary STRING, 
-	Text STRING ) row format delimited fields terminated by ',';;
+	Text STRING ) row format delimited fields terminated by ',';
 	
 
-LOAD DATA INPATH '/user/hive/input/Reviewx.csv' OVERWRITE INTO TABLE amazonproduct;
+LOAD DATA INPATH '/user/hive/input/Reviews.csv' OVERWRITE INTO TABLE amazonproduct;
 
 select productid, dateyear, avg(score) from(
 	select productid, year(from_unixtime(time)) as dateyear,score from amazonproduct) as p2  
