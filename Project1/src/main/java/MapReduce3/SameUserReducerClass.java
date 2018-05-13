@@ -23,6 +23,7 @@ public class SameUserReducerClass extends Reducer<Text, Text, Text, Text> {
 		for (Text value : values) {
 			user.add(value.toString());
 		}
+		
 		context.write(key, new Text(user.toString()));
 	}
 }
