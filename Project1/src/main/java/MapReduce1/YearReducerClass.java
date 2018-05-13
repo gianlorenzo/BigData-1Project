@@ -17,20 +17,18 @@ import org.apache.hadoop.mapreduce.Reducer.Context;
 
 import sun.awt.SunHints.Value;
 
-public class YearReducerClass extends Reducer<Text, IntWritable, Text, Text> {  // i secondi due sono l'output
+public class YearReducerClass extends Reducer<Text, Text, Text, Text> {  // i secondi due sono l'output
 
-	public void reduce(Text key, Iterable<IntWritable> values,Context context) throws IOException, InterruptedException {
+	public void reduce(Text key, Iterable<Text> values,Context context) throws IOException, InterruptedException {
 
-		int somma=0;
+		String resoconto="";
 		
-		for (IntWritable value : values) {
+		for (Text value : values) {
 		
-			somma+=value.get();
+			resoconto=resoconto+"  "+value.toString();
 		}
-			String[] word=key.toString().split("--");
-			
-			
-			context.write(new Text(word[0]),new Text(word[1]+"--"+Integer.toString(somma)));
+		
+		context.write(key,new Text(resoconto));
 		
 	}
 }

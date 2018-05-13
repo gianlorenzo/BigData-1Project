@@ -15,9 +15,9 @@ import java.util.Calendar;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-public class YearMapperClass extends Mapper<LongWritable, Text, Text, IntWritable> {
+public class YearMapperClass extends Mapper<LongWritable, Text, Text, Text> {
 
-	private static final IntWritable one = new IntWritable(1);
+	//private static final IntWritable one = new IntWritable(1);
 	//private static final Text MISSING = new Text("0");
 	private Text word = new Text();
 	private Text chiave = new Text();
@@ -40,14 +40,14 @@ public class YearMapperClass extends Mapper<LongWritable, Text, Text, IntWritabl
 					{
 							word.set(tokenizer.nextToken());
 							chiave.set(Long.toString(anno)+"--"+word);
-							context.write(chiave,one);
+							context.write(chiave,new Text("1"));
 					}
 				}
 				
 		}
 		catch(NumberFormatException ex)
 		{
-			context.write(new Text("0000--"),one);
+			context.write(new Text("0000--"),new Text("1"));
 		}
 			
 		}

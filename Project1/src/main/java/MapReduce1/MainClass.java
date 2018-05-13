@@ -22,9 +22,8 @@ public static void main (String args[]) throws Exception {
 		
 		job.setJarByClass(MainClass.class);
 		job.setMapperClass(YearMapperClass.class);
-		
-	//	job.setCombinerClass(YearCombinerClass.class);
-		
+			
+		job.setCombinerClass(YearCombinerClass.class);
 		job.setReducerClass(YearReducerClass.class);
 		
 
@@ -32,7 +31,7 @@ public static void main (String args[]) throws Exception {
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
 		job.setMapOutputKeyClass(Text.class);	
-		job.setMapOutputValueClass(IntWritable.class);
+		job.setMapOutputValueClass(Text.class);
 		job.setOutputKeyClass(Text.class);	
 		job.setOutputValueClass(Text.class);
 
