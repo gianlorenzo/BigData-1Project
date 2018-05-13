@@ -25,7 +25,7 @@ public class ProductMapperClass extends Mapper<LongWritable, Text, Text, DoubleW
 			}
 		}
 		catch (NumberFormatException e) {
-			context.write(new Text("Score iniziale"),missing);
+			//context.write(new Text("Score iniziale"),missing);
 		}
 
 	}

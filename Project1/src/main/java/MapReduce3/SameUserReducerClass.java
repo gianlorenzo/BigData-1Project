@@ -13,10 +13,12 @@ import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.Reducer.Context;
 
-public class SameUserReducerClass extends Reducer<BigramProductWritable, Text, BigramProductWritable, LongWritable> {
-	public void reduce(BigramProductWritable products, Iterable<Text> userIds, Context context) throws IOException, InterruptedException {
-		
-		context.write(products, new LongWritable(1));
-	}
+public class SameUserReducerClass extends Reducer<BigramProductWritable, Text, Text, Text> {
+	public void reduce(Text products, Text userIds, Context context) throws IOException, InterruptedException {
 
+		
+		
+		context.write(products, userIds);
+
+	}
 }
