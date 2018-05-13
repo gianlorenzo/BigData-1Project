@@ -1,6 +1,7 @@
 package MapReduce1;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -25,10 +26,43 @@ public class YearReducerClass extends Reducer<Text, Text, Text, Text> {  // i se
 		
 		for (Text value : values) {
 		
-			resoconto=resoconto+"  "+value.toString();
+			resoconto=resoconto+"\t"+value.toString();
 		}
 		
-		context.write(key,new Text(resoconto));
+		String topTen="";
+		topTen=getTopTen(resoconto);
+		context.write(key,new Text(topTen));
 		
+	}
+	
+	public String getTopTen(String resoconto)
+	{
+		String[] tot=resoconto.split("\t");	
+		Map<String,Integer> map= new HashMap<String,Integer>();
+		
+		for(int i=0;i<tot.length;i++)
+		{
+			if(tot[i].split("--").length>1)
+				map.put(tot[i].split("--")[0],Integer.parseInt(tot[i].split("--")[1]));		
+		}
+		int k=0;
+		String [] res= new String[10];
+		while(k<10 && !map.isEmpty())
+		{
+			int maxx=0;	
+			String chiave="";	
+			for(Map.Entry<String,Integer> entry:map.entrySet())
+				{
+					if(entry.getValue()>=maxx)
+						{
+							maxx=entry.getValue();
+							chiave=entry.getKey();
+						}			
+				}
+			map.remove(chiave);
+			res[k]=chiave+":"+Integer.toString(maxx);
+			k++;		
+		}
+		return Arrays.toString(res);
 	}
 }

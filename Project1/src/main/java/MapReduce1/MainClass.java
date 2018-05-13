@@ -1,6 +1,10 @@
 package MapReduce1;
 
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -18,6 +22,7 @@ public class MainClass {
 	
 public static void main (String args[]) throws Exception {
 		
+	
 		Job job = new Job(new Configuration(), "MainClass");
 		
 		job.setJarByClass(MainClass.class);
@@ -36,7 +41,8 @@ public static void main (String args[]) throws Exception {
 		job.setOutputValueClass(Text.class);
 
 		job.waitForCompletion(true);
-
+  
+			
 	}
 
 }
