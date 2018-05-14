@@ -2,6 +2,7 @@ package MapReduce3;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,48 @@ public class SameUserReducerClass extends Reducer<Text, Text, Text, Text> {
 			user.add(value.toString());
 		}
 		
-		context.write(key, new Text(user.toString()));
+		List<DoppiaLista<String,String>> coppie=getAllUserForProduct(user);
+		int i=0;
+		while(i<coppie.size())
+		{
+		context.write(key, new Text("\t"+coppie.get(i).getPrimo()+"--"+coppie.get(i).getSecondo()));
+		i++;
+		}
 	}
+	
+
+	private List<DoppiaLista<String, String>> getAllUserForProduct(List<String> user) 
+	{
+		int i=0;
+		DoppiaLista <String,String> coppia;
+		List<DoppiaLista<String,String>> coppie=new ArrayList<DoppiaLista<String, String>>();
+		for(String utente : user)
+		{
+			while(i+1<user.size())
+			{
+				if(user.get(i).compareTo(user.get(i+1))<0)
+				{
+					coppia=new DoppiaLista<String, String>(user.get(i),user.get(i+1));
+				}
+				else
+				{
+					coppia=new DoppiaLista<String, String>(user.get(i+1),user.get(i));
+				}
+			coppie.add(coppia);
+			i++;
+			}
+			
+		}
+		return coppie;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
