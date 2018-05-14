@@ -37,20 +37,21 @@ public class SameUserReducerClass extends Reducer<Text, Text, Text, Text> {
 
 	private List<DoppiaLista<String, String>> getAllUserForProduct(List<String> user) 
 	{
-		int i=0;
+		int i=0,j=0;
 		DoppiaLista <String,String> coppia;
 		List<DoppiaLista<String,String>> coppie=new ArrayList<DoppiaLista<String, String>>();
 		for(String utente : user)
 		{
-			while(i+1<user.size())
+			j++;
+			while(i+j<user.size())
 			{
-				if(user.get(i).compareTo(user.get(i+1))<0)
+				if(utente.compareTo(user.get(i+j))<0)
 				{
-					coppia=new DoppiaLista<String, String>(user.get(i),user.get(i+1));
+					coppia=new DoppiaLista<String, String>(utente,user.get(i+j));
 				}
 				else
 				{
-					coppia=new DoppiaLista<String, String>(user.get(i+1),user.get(i));
+					coppia=new DoppiaLista<String, String>(user.get(i+j),utente);
 				}
 			coppie.add(coppia);
 			i++;
