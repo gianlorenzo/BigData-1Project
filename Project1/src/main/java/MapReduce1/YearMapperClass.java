@@ -1,18 +1,13 @@
 package MapReduce1;
 
 import java.io.IOException;
-//import java.util.StringTokenizer;
 
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.MapWritable;
 import org.apache.hadoop.io.Text;
-//import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.util.Calendar;
-//import java.util.HashMap;
-import java.util.Map;
+
 import java.util.StringTokenizer;
 
 public class YearMapperClass extends Mapper<LongWritable, Text, Text, Text> {

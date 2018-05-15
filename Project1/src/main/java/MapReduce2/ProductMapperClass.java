@@ -9,7 +9,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 public class ProductMapperClass extends Mapper<LongWritable, Text, Text, DoubleWritable> {
-	private static final DoubleWritable missing = new DoubleWritable(0);
 
 	public void map(LongWritable key, Text value, Context context)
 			throws IOException, InterruptedException {
@@ -25,7 +24,6 @@ public class ProductMapperClass extends Mapper<LongWritable, Text, Text, DoubleW
 			}
 		}
 		catch (NumberFormatException e) {
-			//context.write(new Text("Score iniziale"),missing);
 		}
 
 	}

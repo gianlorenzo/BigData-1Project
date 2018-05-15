@@ -14,7 +14,10 @@ import org.apache.hadoop.io.Text;
 public class MainClass {
 	
 	public static void main (String args[]) throws Exception {
+		
+		double inizio = System.currentTimeMillis();
 
+		
 		Job job = new Job(new Configuration(), "MainClass");
 
 		job.setJarByClass(MainClass.class);
@@ -30,6 +33,8 @@ public class MainClass {
 		job.setOutputValueClass(DoubleWritable.class);
 
 		job.waitForCompletion(true);
+		
+		System.out.println("Tempo impiegato per eseguire il Job2: " + (System.currentTimeMillis()-inizio)/1000);
 
 
 	}

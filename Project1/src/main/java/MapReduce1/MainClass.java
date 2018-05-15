@@ -1,16 +1,11 @@
 package MapReduce1;
 
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.MapWritable;
-//import org.apache.hadoop.io.LongWritable;
+
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -22,6 +17,7 @@ public class MainClass {
 	
 public static void main (String args[]) throws Exception {
 		
+		double inizio = System.currentTimeMillis();
 	
 		Job job = new Job(new Configuration(), "MainClass");
 		
@@ -41,7 +37,8 @@ public static void main (String args[]) throws Exception {
 		job.setOutputValueClass(Text.class);
 
 		job.waitForCompletion(true);
-  
+		
+		System.out.println("Tempo impiegato per eseguire il Job1 :" + (System.currentTimeMillis()-inizio)/1000);
 			
 	}
 

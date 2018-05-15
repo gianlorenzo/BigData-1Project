@@ -2,14 +2,10 @@ package MapReduce1;
 
 import java.io.IOException;
 
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.OutputCollector;
-import org.apache.hadoop.mapreduce.Reducer;
-import org.apache.hadoop.mapreduce.Reducer.Context;
 
-import sun.awt.SunHints.Value;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Reducer;
+
 
 public class YearCombinerClass extends Reducer<Text, Text, Text, Text> {  // i secondi due sono l'output
 
