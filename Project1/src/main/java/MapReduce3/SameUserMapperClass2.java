@@ -11,6 +11,18 @@ public class SameUserMapperClass2 extends Mapper<LongWritable, Text, Text, Text>
 	
 
 	public void map(LongWritable key, Text value,Context context)	throws IOException, InterruptedException {
+
+		try {		
+			// user 2 -->prodotto 1
+			String line = value.toString();
+			String[] fields = line.split("\t");
+			if(fields.length>0) {
+				context.write(new Text(fields[1]), new Text(fields[0]));			
+		   	}
+		   }
+		catch(Exception e) 
+			{
+			}
 	
 	}
 	
