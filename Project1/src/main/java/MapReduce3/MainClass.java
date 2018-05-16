@@ -19,11 +19,12 @@ public class MainClass {
 
 		Job job = new Job(new Configuration(), "MainClass");
 
+		Path file=new Path(args[1]);
 		job.setJarByClass(MainClass.class);
 		job.setMapperClass(SameUserMapperClass.class);
 		job.setReducerClass(SameUserReducerClass.class);
 		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));	
+		FileOutputFormat.setOutputPath(job, file);	
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(Text.class);
 		job.waitForCompletion(true);
@@ -33,7 +34,7 @@ public class MainClass {
 		job2.setJarByClass(MainClass.class);
 		job2.setMapperClass(SameUserMapperClass2.class);
 		job2.setReducerClass(SameUserReducerClass2.class);
-		FileInputFormat.addInputPath(job2, new Path(args[1]));
+		FileInputFormat.addInputPath(job2, file);
 		FileOutputFormat.setOutputPath(job2, new Path(args[1]+"2"));	
 		job2.setOutputKeyClass(Text.class);
 		job2.setOutputValueClass(Text.class);

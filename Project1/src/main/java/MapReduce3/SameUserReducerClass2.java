@@ -17,7 +17,6 @@ public class SameUserReducerClass2 extends Reducer<Text, Text, Text, Text> {
 			product.add(value.toString());
 		}
 		
-		
 		context.write(key, new Text("\t"+product.toString()));
 		
 	}
