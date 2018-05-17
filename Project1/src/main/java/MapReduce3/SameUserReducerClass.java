@@ -29,7 +29,7 @@ public class SameUserReducerClass extends Reducer<Text, Text, Text, Text> {
 		int i=0;
 		while(i<coppie.size())
 		{
-		context.write(key, new Text("\t"+coppie.get(i).getPrimo()+"--"+coppie.get(i).getSecondo()));
+		context.write(key, new Text("&&"+coppie.get(i).getPrimo()+"--"+coppie.get(i).getSecondo()));
 		i++;
 		}
 	}
@@ -54,7 +54,10 @@ public class SameUserReducerClass extends Reducer<Text, Text, Text, Text> {
 				{
 					coppia=new DoppiaLista<String, String>(user.get(i+j),utente);
 				}
-			coppie.add(coppia);
+				if(utente.compareTo(user.get(i+j))!=0)
+				{
+						coppie.add(coppia);
+				}
 			i++;
 			}
 			

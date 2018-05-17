@@ -18,7 +18,7 @@ public class SameUserMapperClass extends Mapper<LongWritable, Text, Text, Text>{
 			// user 2 -->prodotto 1
 			String line = value.toString();
 			String[] fields = line.split(",");
-			context.write(new Text(fields[1]), new Text(fields[2]));			
+			context.write(new Text(fields[2]), new Text(fields[1]));			
 		   }
 		catch(Exception e) 
 			{
