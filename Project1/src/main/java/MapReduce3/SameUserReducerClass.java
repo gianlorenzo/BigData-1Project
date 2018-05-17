@@ -34,7 +34,6 @@ public class SameUserReducerClass extends Reducer<Text, Text, Text, Text> {
 		}
 	}
 	
-
 	private List<DoppiaLista<String, String>> getAllUserForProduct(List<String> user) 
 	{
 		int j=0;

@@ -23,6 +23,4 @@ public class SameUserMapperClass2 extends Mapper<LongWritable, Text, Text, Text>
 			}
 	
 	}
-	
-	
 	}

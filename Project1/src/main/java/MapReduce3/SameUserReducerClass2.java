@@ -19,7 +19,6 @@ public class SameUserReducerClass2 extends Reducer<Text, Text, Text, IntWritable
 			sum++;
 		}
 		context.write(key, new IntWritable(sum));
-		
 	}
 
 }

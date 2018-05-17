@@ -22,6 +22,7 @@ public class SameUserMapperClass extends Mapper<LongWritable, Text, Text, Text>{
 		   }
 		catch(Exception e) 
 			{
+			
 			}
 	}
 }

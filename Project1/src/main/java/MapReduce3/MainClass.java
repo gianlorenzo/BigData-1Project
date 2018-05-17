@@ -19,6 +19,7 @@ public class MainClass {
 	public static void main (String args[]) throws Exception {
 
 		double inizio = System.currentTimeMillis();
+		
 		Job job = new Job(new Configuration(), "MainClass");
 
 		Path file=new Path(args[1]);
