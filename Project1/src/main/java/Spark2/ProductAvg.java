@@ -32,7 +32,6 @@ public class ProductAvg {
 					
 				});
 		
-		//JavaPairRDD<String,Tuple2<Long,Float>>
 	}
 
 }
