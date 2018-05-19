@@ -2,24 +2,25 @@ package MapReduce2;
 
 
 import java.io.IOException;
-
-import org.apache.hadoop.io.DoubleWritable;
-
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.hadoop.io.Text;
-
 import org.apache.hadoop.mapreduce.Reducer;
 
 
-public class ProductReducerClass extends Reducer<Text, DoubleWritable, Text, DoubleWritable> {
-	private double score;
-	private double lenght;
-	public void reduce(Text key, Iterable<DoubleWritable> values,
-			Context context) throws IOException, InterruptedException {
-		for (DoubleWritable value : values) {
-			score+= value.get();
-			lenght++;
+
+
+public class ProductReducerClass extends Reducer<Text, Text, Text, Text> {
+	
+	List<String> medie=new ArrayList<String>();
+	
+	public void reduce(Text key, Iterable<Text> values,Context context) throws IOException, InterruptedException {
+		
+		for (Text value : values) {
+			medie.add(value.toString());
+			
 		}
-		context.write(key, new DoubleWritable(score/lenght));
+		context.write(key, new Text(medie.toString()));
 	}
 
 

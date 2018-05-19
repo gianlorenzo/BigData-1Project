@@ -23,6 +23,7 @@ public class MainClass {
 		job.setJarByClass(MainClass.class);
 
 		job.setMapperClass(ProductMapperClass.class);
+		job.setCombinerClass(ProductCombinerClass.class);
 		job.setReducerClass(ProductReducerClass.class);
 
 
@@ -30,7 +31,7 @@ public class MainClass {
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 		
 		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(DoubleWritable.class);
+		job.setOutputValueClass(Text.class);
 
 		job.waitForCompletion(true);
 		
