@@ -69,7 +69,7 @@ public class WordPerYear implements Serializable {
 			.mapToPair(x -> new Tuple2<Long, List<Tuple2<String, Long>>>(x._1(), getWordOccurencies(x._2())))
 			.mapValues(x -> x.stream().limit(10).collect(Collectors.toList()))
 			.sortByKey(true)
-			.coalesce(1).saveAsTextFile("/home/user/Scrivania/spark1.txt");
+			.coalesce(1).saveAsTextFile("/home/user/Scrivania/spark1");
 		}
 		
 
