@@ -4,7 +4,7 @@ public class DoppiaLista <u1,u2>
 {
 	private u1 primo;
 	private u2 secondo;
-	
+
 	public DoppiaLista(u1 primo, u2 secondo) {
 		this.primo = primo;
 		this.secondo = secondo;
@@ -21,6 +21,6 @@ public class DoppiaLista <u1,u2>
 	public void setSecondo(u2 secondo) {
 		this.secondo = secondo;
 	}
-	
+
 
 }
