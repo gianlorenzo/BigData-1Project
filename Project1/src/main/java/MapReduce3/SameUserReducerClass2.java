@@ -13,7 +13,7 @@ public class SameUserReducerClass2 extends Reducer<Text, Text, Text, IntWritable
 
 		//	List<String> product=new ArrayList<String>();
 		int sum=0;
-		for (Text value : values) {
+		for (@SuppressWarnings("unused") Text value : values) {
 			//product.add(value.toString());
 			sum++;
 		}
