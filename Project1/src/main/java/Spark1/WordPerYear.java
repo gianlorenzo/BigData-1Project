@@ -34,9 +34,9 @@ public class WordPerYear implements Serializable {
 		this.inputPath = inputPath;
 	}
 
-	private JavaRDD<String[]> mapper() {
+	public JavaRDD<String[]> mapper() {
 		SparkConf conf = new SparkConf()
-				.setAppName("Top 10 Words Per Year");
+				.setAppName("ParolePerAnni");
 
 		@SuppressWarnings("resource")
 		JavaSparkContext sc = new JavaSparkContext(conf);
@@ -80,7 +80,7 @@ public class WordPerYear implements Serializable {
 		return words;
 	}
 
-	public static List<Tuple2<String, Long>> getWordOccurencies(Iterable<String> it) {
+	public List<Tuple2<String, Long>> getWordOccurencies(Iterable<String> it) {
 		Map<String, Long> occourrenceMap = new HashMap<>();
 		List<Tuple2<String, Long>> sortedMap = new LinkedList<Tuple2<String, Long>>();
 

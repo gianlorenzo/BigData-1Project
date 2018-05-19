@@ -24,8 +24,8 @@ public class ScoreMedioPerAnno implements Serializable {
 		this.inputPath = file;
 	}
 
-	private JavaRDD<String[]> mapper() {
-		SparkConf conf = new SparkConf().setAppName("AvgScore");
+	public JavaRDD<String[]> mapper() {
+		SparkConf conf = new SparkConf().setAppName("ScoreMedioPerAnni");
 
 		@SuppressWarnings("resource")
 		JavaSparkContext sc = new JavaSparkContext(conf);
@@ -64,7 +64,7 @@ public class ScoreMedioPerAnno implements Serializable {
 		}
 	}
 
-	public static List<Tuple2<Long, Double>> scoreMediPerAnni(Iterable<Tuple2<Long, Double>> tuple) {
+	public List<Tuple2<Long, Double>> scoreMediPerAnni(Iterable<Tuple2<Long, Double>> tuple) {
 		Map<Long, List<Double>> scorePerAnno = new HashMap<>();
 		List<Tuple2<Long, Double>> scoreMedioPerAnno = new ArrayList<>();
 
