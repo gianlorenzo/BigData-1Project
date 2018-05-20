@@ -22,13 +22,11 @@ import scala.Tuple2;
 
 
 public class WordPerYear implements Serializable {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	private String inputPath;
+	private String outputPath = "~/SparkJob1";
 
 	public WordPerYear(String inputPath) {
 		this.inputPath = inputPath;
@@ -121,7 +119,7 @@ public class WordPerYear implements Serializable {
 		.mapToPair(x -> new Tuple2<Long, List<Tuple2<String, Long>>>(x._1(), getWordOccurencies(x._2())))
 		.mapValues(x -> x.stream().limit(10).collect(Collectors.toList()))
 		.sortByKey(true)
-		.coalesce(1).saveAsTextFile("/home/gianlorenzo/Scrivania/spark1");
+		.coalesce(1).saveAsTextFile(outputPath);
 	}
 
 

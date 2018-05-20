@@ -15,6 +15,8 @@ public class ProdottoConUtentiComuni {
 
 	
 	String inputPath;
+	private String outputPath = "~/SparkJon3";
+
 
 	public ProdottoConUtentiComuni(String file){
 		this.inputPath = file;
@@ -50,7 +52,7 @@ public class ProdottoConUtentiComuni {
 		.groupByKey()
 		.mapToPair(x -> new Tuple2<Tuple2<String, String>, Long>(x._1(), (long) Lists.newArrayList(x._2()).size()))
 		.sortByKey(Comparatore.compara((a, b) -> a._1().compareTo(b._1())))
-		.coalesce(1).saveAsTextFile("/home/user/Scrivania/spark3");	
+		.coalesce(1).saveAsTextFile(outputPath);	
 	}
 	
 	public static void main(String[] args) {

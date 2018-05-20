@@ -18,7 +18,7 @@ public class ScoreMedioPerAnno implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	String inputPath;
-	String outputPath = "/home/gianlorenzo/out5";
+	private String outputPath = "~/SparkJob2";
 
 	public ScoreMedioPerAnno(String file){
 		this.inputPath = file;
