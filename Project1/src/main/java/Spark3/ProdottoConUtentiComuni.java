@@ -9,13 +9,12 @@ import scala.Tuple2;
 import com.google.common.collect.Lists;
 
 
-import Spark3.SerializableComparator;
+import Spark3.Comparatore;
 
 public class ProdottoConUtentiComuni {
 
 	
 	String inputPath;
-	String outputPath = "/home/gianlorenzo/out7";
 
 	public ProdottoConUtentiComuni(String file){
 		this.inputPath = file;
@@ -41,8 +40,7 @@ public class ProdottoConUtentiComuni {
 		JavaRDD<String[]> reducer = mapper();
 		
 		JavaPairRDD<String, String> user2product = reducer.filter(x -> x != null)		
-														  .mapToPair(x -> new Tuple2<String, String> (x[2], x[1]));
-		
+									.mapToPair(x -> new Tuple2<String, String> (x[2], x[1]));	
 		user2product
 		.join(user2product)
 		.filter(x -> !x._2()._1().equals(x._2()._2()))
@@ -51,18 +49,12 @@ public class ProdottoConUtentiComuni {
 		.mapToPair(x -> new Tuple2<Tuple2<String, String>, String>(x._2(), x._1()))
 		.groupByKey()
 		.mapToPair(x -> new Tuple2<Tuple2<String, String>, Long>(x._1(), (long) Lists.newArrayList(x._2()).size()))
-		.sortByKey(SerializableComparator.serialize((a, b) -> a._1().compareTo(b._1())))
-		.coalesce(1).saveAsTextFile(outputPath);	
+		.sortByKey(Comparatore.compara((a, b) -> a._1().compareTo(b._1())))
+		.coalesce(1).saveAsTextFile("/home/user/Scrivania/spark3");	
 	}
 	
 	public static void main(String[] args) {
-		if(args.length < 1) { 
-			System.err.println("error"); 
-			System.exit(1);
-		}
-
 		new ProdottoConUtentiComuni(args[0]).ProdottiConUtentiComuni();
 	}
-	
 
 }

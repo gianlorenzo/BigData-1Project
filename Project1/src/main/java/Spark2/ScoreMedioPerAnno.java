@@ -120,10 +120,6 @@ public class ScoreMedioPerAnno implements Serializable {
 	}
 
 	public static void main(String[] args) {
-		if(args.length < 1) { 
-			System.err.println("error"); 
-			System.exit(1);
-		}
 		new ScoreMedioPerAnno(args[0]).reducer();
 
 	}
