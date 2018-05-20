@@ -16,7 +16,7 @@ public class ProductCombinerClass extends Reducer<Text, Text, Text, Text> {
 			double media=score/lenght;
 			String[] chiave=key.toString().split("--");
 			if(chiave.length>1)
-			context.write(new Text(chiave[0]), new Text(chiave[1]+" : "+String.valueOf(media)));
+			context.write(new Text(chiave[0]), new Text("{"+chiave[1]+" : "+String.valueOf(media)+"}"));
 		}
 
 
