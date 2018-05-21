@@ -10,14 +10,14 @@ import com.google.common.collect.Lists;
 
 import Spark3.Comparatore;
 
-public class ProdottoConUtentiComuni {
+public class ProdottiConUtentiComuni {
 
 	
 	String inputPath;
 	private String outputPath = "~~~/Spark3";
 
 
-	public ProdottoConUtentiComuni(String file){
+	public ProdottiConUtentiComuni(String file){
 		this.inputPath = file;
 	}
 	
@@ -37,10 +37,8 @@ public class ProdottoConUtentiComuni {
 		}).cache();
 	}
 	
-	private void ProdottiConUtentiComuni() {
-		JavaRDD<String[]> reducer = mapper();
-		
-		JavaPairRDD<String, String> userProduct = reducer.filter(x -> x != null)		
+	private void reducer() {		
+		JavaPairRDD<String, String> userProduct = mapper().filter(x -> x != null)		
 									.mapToPair(x -> new Tuple2<String, String> (x[2], x[1]));	
 		userProduct
 		.join(userProduct)
@@ -60,8 +58,8 @@ public class ProdottoConUtentiComuni {
 		if(args.length < 1) {  
 			System.exit(1);
 		}
-		new ProdottoConUtentiComuni(args[0]).ProdottiConUtentiComuni();
-		System.out.println("Tempo impiegato per eseguire il Job1 :" + (System.currentTimeMillis()-inizio)/1000);
+		new ProdottiConUtentiComuni(args[0]).reducer();
+		System.out.println("Tempo impiegato per eseguire il Job3 :" + (System.currentTimeMillis()-inizio)/1000);
 
 	}
 

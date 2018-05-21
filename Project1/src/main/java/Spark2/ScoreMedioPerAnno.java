@@ -126,7 +126,7 @@ public class ScoreMedioPerAnno implements Serializable {
 			System.exit(1);
 		}
 		new ScoreMedioPerAnno(args[0]).reducer();
-		System.out.println("Tempo impiegato per eseguire il Job1 :" + (System.currentTimeMillis()-inizio)/1000);
+		System.out.println("Tempo impiegato per eseguire il Job2 :" + (System.currentTimeMillis()-inizio)/1000);
 
 
 	}
