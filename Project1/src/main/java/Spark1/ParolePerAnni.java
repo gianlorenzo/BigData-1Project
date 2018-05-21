@@ -49,17 +49,20 @@ public class ParolePerAnni implements Serializable {
 		}).cache();
 	}
 
-	public long unixYearConverter(String year)
+	public Long unixYearConverter(String year)
 	{
 		try {
 			Calendar date=Calendar.getInstance();
 			date.setTimeInMillis(Long.parseLong((year))*1000);	
 			long anno=date.get(Calendar.YEAR);
-			return anno;
+			if(anno!=1970)
+				return anno;
+			else
+				return (long) 0;
 		}
 		catch(NumberFormatException ex)
 		{
-			return 0;
+			return (long) 0;
 		}
 
 	}
@@ -109,6 +112,7 @@ public class ParolePerAnni implements Serializable {
 		JavaRDD<String[]> reduce = mapper();
 		reduce
 		.filter(x -> x != null)
+		.filter(x -> unixYearConverter(x[7])!=0)
 		.mapToPair(x -> new Tuple2<Long, List<String>> (
 				unixYearConverter(x[7]), 
 				getToken(x[8])
