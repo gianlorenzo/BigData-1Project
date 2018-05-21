@@ -1,6 +1,5 @@
 package Spark3;
 
-
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -15,7 +14,7 @@ public class ProdottoConUtentiComuni {
 
 	
 	String inputPath;
-	private String outputPath = "~/SparkJon3";
+	private String outputPath = "~~~/Spark3";
 
 
 	public ProdottoConUtentiComuni(String file){
@@ -41,22 +40,29 @@ public class ProdottoConUtentiComuni {
 	private void ProdottiConUtentiComuni() {
 		JavaRDD<String[]> reducer = mapper();
 		
-		JavaPairRDD<String, String> user2product = reducer.filter(x -> x != null)		
+		JavaPairRDD<String, String> userProduct = reducer.filter(x -> x != null)		
 									.mapToPair(x -> new Tuple2<String, String> (x[2], x[1]));	
-		user2product
-		.join(user2product)
+		userProduct
+		.join(userProduct)
 		.filter(x -> !x._2()._1().equals(x._2()._2()))
 		.mapValues(x -> (x._1().compareTo(x._2()) == 1) ? new Tuple2<>(x._2(), x._1()) : x)
 		.distinct()
 		.mapToPair(x -> new Tuple2<Tuple2<String, String>, String>(x._2(), x._1()))
 		.groupByKey()
-		.mapToPair(x -> new Tuple2<Tuple2<String, String>, Long>(x._1(), (long) Lists.newArrayList(x._2()).size()))
+		.mapToPair(x -> new Tuple2<Tuple2<String, String>, Long>(x._1(),(long) Lists.newArrayList(x._2()).size()))
 		.sortByKey(Comparatore.compara((a, b) -> a._1().compareTo(b._1())))
 		.coalesce(1).saveAsTextFile(outputPath);	
 	}
 	
 	public static void main(String[] args) {
+		double inizio = System.currentTimeMillis();
+
+		if(args.length < 1) {  
+			System.exit(1);
+		}
 		new ProdottoConUtentiComuni(args[0]).ProdottiConUtentiComuni();
+		System.out.println("Tempo impiegato per eseguire il Job1 :" + (System.currentTimeMillis()-inizio)/1000);
+
 	}
 
 }

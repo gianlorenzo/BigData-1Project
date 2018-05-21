@@ -18,7 +18,7 @@ public class ScoreMedioPerAnno implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	String inputPath;
-	private String outputPath = "~/SparkJob2";
+	private String outputPath = "~~/Spark2";
 
 	public ScoreMedioPerAnno(String file){
 		this.inputPath = file;
@@ -120,7 +120,14 @@ public class ScoreMedioPerAnno implements Serializable {
 	}
 
 	public static void main(String[] args) {
+		double inizio = System.currentTimeMillis();
+
+		if(args.length < 1) {  
+			System.exit(1);
+		}
 		new ScoreMedioPerAnno(args[0]).reducer();
+		System.out.println("Tempo impiegato per eseguire il Job1 :" + (System.currentTimeMillis()-inizio)/1000);
+
 
 	}
 

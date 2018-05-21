@@ -21,14 +21,14 @@ import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
 
-public class WordPerYear implements Serializable {
+public class ParolePerAnni implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	private String inputPath;
-	private String outputPath = "~/SparkJob1";
+	private String outputPath = "~/Spark1";
 
-	public WordPerYear(String inputPath) {
+	public ParolePerAnni(String inputPath) {
 		this.inputPath = inputPath;
 	}
 
@@ -124,11 +124,15 @@ public class WordPerYear implements Serializable {
 
 
 	public static void main(String[] args) {
+		double inizio = System.currentTimeMillis();
+
 		if(args.length < 1) {  
 			System.exit(1);
 		}
 
-		new WordPerYear(args[0]).reducer();
+		new ParolePerAnni(args[0]).reducer();
+		System.out.println("Tempo impiegato per eseguire il Job1 :" + (System.currentTimeMillis()-inizio)/1000);
+
 
 	}
 
