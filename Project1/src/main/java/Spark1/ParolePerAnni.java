@@ -81,7 +81,7 @@ public class ParolePerAnni implements Serializable {
 		return words;
 	}
 
-	public List<Tuple2<String, Long>> getWordOccurencies(Iterable<String> it) {
+	public List<Tuple2<String, Long>> conta(Iterable<String> it) {
 		Map<String, Long> occourrenceMap = new HashMap<>();
 		List<Tuple2<String, Long>> sortedMap = new LinkedList<Tuple2<String, Long>>();
 
@@ -120,7 +120,7 @@ public class ParolePerAnni implements Serializable {
 				)
 		.flatMapValues(x -> x)
 		.groupByKey()
-		.mapToPair(x -> new Tuple2<Long, List<Tuple2<String, Long>>>(x._1(), getWordOccurencies(x._2())))
+		.mapToPair(x -> new Tuple2<Long, List<Tuple2<String, Long>>>(x._1(), conta(x._2())))
 		.mapValues(x -> x.stream().limit(10).collect(Collectors.toList()))
 		.sortByKey(true)
 		.coalesce(1).saveAsTextFile(outputPath);
@@ -129,11 +129,6 @@ public class ParolePerAnni implements Serializable {
 
 	public static void main(String[] args) {
 		double inizio = System.currentTimeMillis();
-
-		if(args.length < 1) {  
-			System.exit(1);
-		}
-
 		new ParolePerAnni(args[0]).reducer();
 		System.out.println("Tempo impiegato per eseguire il Job1 :" + (System.currentTimeMillis()-inizio)/1000);
 
